@@ -1,10 +1,9 @@
 import nodemailer from "nodemailer";
-import { GMAIL_ID, GMAIL_PASSWORD } from "../constants";
+import { GMAIL_ID, GMAIL_PASSWORD } from "../constants.js";
 
-async function sendMail(email, title, body) {
-    // Create a transporter
+async function sendEmail(emailId, subject, body) {
     const transporter = nodemailer.createTransport({
-        service: "gmail", // Use Gmail or any other supported service
+        service: "gmail", 
         secure: true,
         port: 465,
         auth: {
@@ -13,15 +12,13 @@ async function sendMail(email, title, body) {
         }
     });
 
-    // Email options
     const mailOptions = {
         from: GMAIL_ID,
-        to: email,
-        subject: title,
+        to: emailId,
+        subject: subject,
         text: body
     };
 
-    // Send the email
     try {
         const info = await transporter.sendMail(mailOptions);
         console.log("Email sent: " + info.response);
@@ -30,4 +27,4 @@ async function sendMail(email, title, body) {
     }
 }
 
-export default sendMail;
+export default sendEmail;

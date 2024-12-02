@@ -1,16 +1,7 @@
-import userModel from "../models/userModel.js";
-import sendCookie from "../utils/sendCookie.js";
-
-function alreadyLoggedIn(req) {
-    const token = req.cookies.token;
-    return token ? true : false;
-}
+import userModel from "../models/user.model.js";
+import sendCookie from "../utils/send_cookie.js";
 
 async function verifyUser(req, res) {
-    if(alreadyLoggedIn) {
-        return res.status(200);
-    }
-
     const {email, password} = req.body;
 
     const user = await userModel.findOne({

@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState(""); 
 
-  const handleSignUp = () => {
-    // Add sign-up logic here
+  const navigate = useNavigate();
+
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post("/api/v1/user/register", {
+        email,
+        password
+      });
+
+      console.log(response);
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error during sign-up:", error);
+    }
   };
 
   return (
@@ -22,6 +38,8 @@ const SignUp = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
               className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
             />
 
@@ -29,13 +47,15 @@ const SignUp = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
                 className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
               />
 
               <button
                 type="button"
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black"
-                onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                onClick={() => setShowPassword(!showPassword)} 
               >
                 {showPassword ? (
                   <FiEyeOff className="h-5 w-5" />
@@ -47,7 +67,7 @@ const SignUp = () => {
 
             <button
               type="button"
-              className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none"
+              className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none hover:bg-[#29af8a] hover:text-white hover:border-2 hover:border-white transition duration-300"
               onClick={handleSignUp}
             >
               Sign Up
@@ -57,10 +77,7 @@ const SignUp = () => {
           <div className="text-center space-y-4 mt-6">
             <p className="text-white text-sm">
               Already have an account?{" "}
-              <Link
-                to="/sign-in"
-                className="text-white font-semibold"
-              >
+              <Link to="/sign-in" className="text-white font-semibold">
                 Sign In
               </Link>
             </p>

@@ -46,7 +46,7 @@ const SignIn = () => {
 
             <button
               type="button"
-              className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none"
+              className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none hover:bg-[#29af8a] hover:text-white hover:border-2 hover:border-white transition duration-300"
               onClick={handleSignIn}
             >
               Sign In

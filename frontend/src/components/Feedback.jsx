@@ -7,21 +7,24 @@ const FeedbackSection = () => {
       feedback: "This platform helped us get clean drinking water.",
       image: "/images/image1.jpg",
     },
+
     {
       name: "Hospital A",
       feedback: "We got essential medical supplies on time.",
       image: "/images/image2.jpg",
     },
+
     {
       name: "NGO A",
       feedback: "We connected with schools in need seamlessly.",
       image: "/images/image3.jpg",
     },
+    
     {
       name: "NGO B",
       feedback: "We are extremely happy to help those in need.",
       image: "/images/image1.jpg",
-    },
+    }
   ];
 
   return (
